@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        //
+        // For this configuration to work, make sure the spark-class script is modified to use SPARK_JAVA_TOOL_OPTIONS by inserting the following line before the exec command in the last line of the script:
+        //
+        // export JAVA_TOOL_OPTIONS="$SPARK_JAVA_TOOL_OPTIONS"
+        //
+        {
+            "type": "scala",
+            "request": "attach",
+            "name": "Cloudant Connector",
+            "buildTarget": "spark-sql-cloudant_2.12",
+            "hostName": "localhost",
+            "port": 5005,
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "start-spark-sql-debug",
+        },
+
+    ],
+}

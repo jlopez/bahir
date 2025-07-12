@@ -1,0 +1,90 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "start-spark-sql",
+            "type": "process",
+            "command": "bin/spark-sql",
+            "args": [
+                "--packages",
+                "org.apache.bahir:spark-sql-cloudant_2.12:3.0.0",
+                "--executor-memory",
+                "8G",
+                "--driver-memory",
+                "8G",
+                "--master",
+                "local"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../spark-3.5.2-bin-hadoop3",
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated"
+            },
+            "isBackground": true,
+            "promptOnClose": false,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}) (WARN|ERROR)  ([^ ]+):(\\d+) - (.*)$",
+                    "severity": 2,
+                    "file": 3,
+                    "line": 4,
+                    "message": 5,
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "Listening for transport dt_socket at address: 5005"
+                }
+            }
+        },
+        {
+            "label": "start-spark-sql-debug",
+            "type": "process",
+            "command": "bin/spark-sql",
+            "args": [
+                "--packages",
+                "org.apache.bahir:spark-sql-cloudant_2.12:3.0.0",
+                "--executor-memory",
+                "8G",
+                "--driver-memory",
+                "8G",
+                "--master",
+                "local"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../spark-3.5.2-bin-hadoop3",
+                "env": {
+                    "SPARK_JAVA_TOOL_OPTIONS": "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
+                }
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated"
+            },
+            "isBackground": true,
+            "promptOnClose": false,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}) (WARN|ERROR)  ([^ ]+):(\\d+) - (.*)$",
+                    "severity": 2,
+                    "file": 3,
+                    "line": 4,
+                    "message": 5,
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "Listening for transport dt_socket at address: 5005"
+                }
+            }
+        }
+    ]
+}

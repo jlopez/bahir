@@ -166,14 +166,12 @@ class JsonStoreDataAccess (config: CloudantConfig)  {
     }
 
     val mainFtr = p.future
-    mainFtr onSuccess {
-      case clResponsesList =>
+    mainFtr onComplete {
+      case Success(clResponsesList) =>
         logger.warn(s"Saved total ${rows.length} " +
           s"with bulkSize $bulkSize " +
           s"for database: ${config.getDbname}")
-    }
-    mainFtr onFailure  {
-      case e =>
+      case Failure(e) =>
         throw new CloudantException("Save to database:" + config.getDbname +
           " failed with reason: " + e.getMessage)
     }

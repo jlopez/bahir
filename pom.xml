@@ -25,7 +25,7 @@
   </parent>
   <groupId>org.apache.bahir</groupId>
   <artifactId>bahir-parent_2.12</artifactId>
-  <version>2.4.0</version>
+  <version>3.0.0</version>
   <packaging>pom</packaging>
   <name>Apache Bahir - Parent POM</name>
   <url>http://bahir.apache.org/</url>
@@ -40,7 +40,7 @@
     <connection>scm:git:git@github.com:apache/bahir.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/bahir.git</developerConnection>
     <url>https://github.com/apache/bahir</url>
-    <tag>v2.4.0-rc1</tag>
+    <tag>v3.0.0</tag>
   </scm>
   <issueManagement>
     <system>JIRA</system>
@@ -77,15 +77,6 @@
   <modules>
     <module>common</module>
     <module>sql-cloudant</module>
-    <module>sql-streaming-akka</module>
-    <module>sql-streaming-mqtt</module>
-    <module>sql-streaming-jdbc</module>
-    <module>streaming-akka</module>
-    <module>streaming-mqtt</module>
-    <module>streaming-pubnub</module>
-    <module>streaming-pubsub</module>
-    <module>streaming-twitter</module>
-    <module>streaming-zeromq</module>
   </modules>
 
   <properties>
@@ -94,18 +85,18 @@
     <skipTests>false</skipTests>
 
     <!-- General project dependencies version -->
-    <java.version>1.8</java.version>
+    <java.version>17</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.version>3.5.4</maven.version>
-    <scala.version>2.12.7</scala.version>
+    <scala.version>2.12.18</scala.version>
     <scala.binary.version>2.12</scala.binary.version>
 
-    <slf4j.version>1.7.16</slf4j.version>
+    <slf4j.version>1.7.36</slf4j.version>
     <log4j.version>1.2.17</log4j.version>
 
     <!-- Spark version -->
-    <spark.version>2.4.0</spark.version>
+    <spark.version>3.5.2</spark.version>
 
     <!-- Hadoop version -->
     <hadoop.version>2.6.5</hadoop.version>
@@ -372,7 +363,7 @@
       <dependency>
         <groupId>org.scalatest</groupId>
         <artifactId>scalatest_${scala.binary.version}</artifactId>
-        <version>3.0.3</version>
+        <version>3.2.19</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -434,7 +425,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.0.0-M1</version>
+          <version>3.6.0</version>
           <executions>
             <execution>
               <id>enforce-versions</id>
@@ -485,6 +476,10 @@
           <configuration>
             <excludes>
               <exclude>.gitignore</exclude>
+              <exclude>.java-version</exclude>
+              <exclude>.bloop/</exclude>
+              <exclude>.metals/</exclude>
+              <exclude>.vscode/</exclude>
               <exclude>.repository/</exclude>
               <exclude>.idea/</exclude>
               <exclude>.git</exclude>
@@ -510,8 +505,8 @@
         <plugin>
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
-          <!-- 3.3.1 won't work with zinc; fails to find javac from java.home -->
-          <version>3.2.2</version>
+          <!-- Updated version for Java 17 compatibility -->
+          <version>4.9.5</version>
           <executions>
             <execution>
               <id>eclipse-add-source</id>
@@ -569,7 +564,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.6.1</version>
+          <version>3.14.0</version>
           <configuration>
             <source>${java.version}</source>
             <target>${java.version}</target>
@@ -586,7 +581,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.20.1</version>
+          <version>3.5.3</version>
           <!-- Note config is repeated in scalatest config -->
           <configuration>
             <includes>
@@ -1113,7 +1108,7 @@
         <property><name>!scala-2.11</name></property>
       </activation>
       <properties>
-        <scala.version>2.12.7</scala.version>
+        <scala.version>2.12.18</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
       </properties>
       <build>

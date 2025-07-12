@@ -66,7 +66,8 @@ class ChangesReceiver(config: CloudantChangesConfig)
       var json = new ChangesRow()
       if (changesInputStream != null) {
         val bufferedReader = new BufferedReader(new InputStreamReader(changesInputStream))
-        while ((json = ChangesRowScanner.readRowFromReader(bufferedReader)) != null) {
+        while (json != null && !isStopped()) {
+          json = ChangesRowScanner.readRowFromReader(bufferedReader)
           if (!isStopped() && json != null && !json.getDoc.has("_deleted")) {
             store(json.getDoc.toString)
           }
